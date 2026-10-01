@@ -1,22 +1,11 @@
-# Gupta Consultancy Website
+GUPTA CONSULTANCY V3
+Files: index.html, style.css, script.js, privacy.html, terms.html, 404.html, favicon.svg.
 
-A ready-made static website for Gupta Consultancy, Bhayandar, Maharashtra.
-
-## Files
-- index.html — website content
-- style.css — design and responsive layout
-- script.js — WhatsApp button, enquiry form and small interactions
-
-## Before publishing
-Open script.js and replace:
-YOUR_WHATSAPP_NUMBER
-with your WhatsApp number in international format without + or spaces.
-Example: 919876543210
-
-Also replace temporary email/phone text inside index.html.
-
-## Run locally
-Simply double-click index.html, or open the folder in VS Code and use a local server extension.
-
-## Important
-This is a static front-end demo. The enquiry form opens WhatsApp; it does not store enquiries in a database.
+Before launch:
+1) In script.js replace 919579597030, 919579597030 and guptaconsultancy1026@gmail.com.
+   Phone/WhatsApp format: country code + number, no + or spaces (example 919876543210).
+2) Review privacy.html and terms.html against actual business practices. Templates are not legal advice.
+3) Open index.html locally and test responsive layout, contact links and enquiry form.
+4) The map is for the general Bhayandar area, not a claimed office address.
+5) Enquiry form opens WhatsApp; this static website does not save submissions.
+6) Upload all files to the root of the existing GitHub repository to deploy.
