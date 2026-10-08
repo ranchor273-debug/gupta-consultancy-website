@@ -1,17 +1,35 @@
-// Configure business contact details before launch.
-const WHATSAPP_NUMBER = "919579597030"; // e.g. 919876543210, no + or spaces
-const BUSINESS_PHONE = "919579597030"; // e.g. 919876543210
-const BUSINESS_EMAIL = "guptaconsultancy1026@gmail.com";
-const FIRM_NAME = "Gupta Consultancy";
-document.getElementById("year").textContent = new Date().getFullYear();
-const menu = document.querySelector(".menu");
-const nav = document.querySelector("nav");
-menu.addEventListener("click",()=>{const opened=nav.classList.toggle("open");menu.setAttribute("aria-expanded",String(opened));});
-nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menu.setAttribute("aria-expanded","false");}));
-function setLink(id,value,prefix,label){const el=document.getElementById(id);if(value&&!value.startsWith("YOUR_")){el.href=prefix+value;if(label)el.textContent=label;}}
-setLink("phone-link",BUSINESS_PHONE,"tel:",BUSINESS_PHONE);
-setLink("email-link",BUSINESS_EMAIL,"mailto:",BUSINESS_EMAIL);
-setLink("footemail",BUSINESS_EMAIL,"mailto:",BUSINESS_EMAIL);
-const wa=document.getElementById("wa");
-if(WHATSAPP_NUMBER&&!WHATSAPP_NUMBER.startsWith("YOUR_")){wa.href=`https://wa.me/${WHATSAPP_NUMBER}`;wa.target="_blank";wa.rel="noopener";}else{wa.addEventListener("click",e=>{e.preventDefault();alert("Add the business WhatsApp number in script.js before publishing.");});}
-document.getElementById("enquiry").addEventListener("submit",e=>{e.preventDefault();if(!WHATSAPP_NUMBER||WHATSAPP_NUMBER.startsWith("YOUR_")){alert("Add the business WhatsApp number in script.js before publishing.");return;}const name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),service=document.getElementById("service").value,message=document.getElementById("message").value.trim();const body=`Hello ${FIRM_NAME},\n\nI have a website enquiry.\nName: ${name}\nPhone: ${phone}\nService: ${service}\nRequirement: ${message||"Not specified"}`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`,"_blank","noopener");});
+const menu=document.querySelector('.menu');
+const nav=document.querySelector('.site-header nav');
+if(menu){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',open?'true':'false')});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}))}
+const form=document.getElementById('contactForm');
+if(form){form.addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('name').value.trim();const phone=document.getElementById('phone').value.trim();const service=document.getElementById('service').value;const message=document.getElementById('message').value.trim();const text=`Hello Gupta Consultancy,\n\nName: ${name}\nPhone: ${phone}\nService: ${service}\nRequirement: ${message||'Please contact me regarding this service.'}`;window.open(`https://wa.me/919579597030?text=${encodeURIComponent(text)}`,'_blank')})}
+document.getElementById('year').textContent=new Date().getFullYear();
+
+
+// Dynamic hero service cards: the floating callouts rotate through Gupta Consultancy services.
+const heroFloatA=document.getElementById('heroFloatA');
+const heroFloatB=document.getElementById('heroFloatB');
+if(heroFloatA && heroFloatB){
+  const floatSets=[
+    [{label:'GST',text:'Compliance support'},{label:'ITR',text:'Tax support'}],
+    [{label:'TDS',text:'Timely compliance'},{label:'MIS',text:'Business reporting'}],
+    [{label:'Accounts',text:'Books organised'},{label:'Payroll',text:'Salary support'}],
+    [{label:'GST',text:'Return filing support'},{label:'Accounts',text:'Bookkeeping support'}],
+    [{label:'ITR',text:'Income tax support'},{label:'TDS',text:'Documentation support'}]
+  ];
+  let floatIndex=0;
+  const updateFloat=(el,item)=>{
+    el.classList.add('is-changing');
+    setTimeout(()=>{
+      el.querySelector('b').textContent=item.label;
+      el.querySelector('span').textContent=item.text;
+      el.querySelector('em').textContent='✓';
+      el.classList.remove('is-changing');
+    },350);
+  };
+  setInterval(()=>{
+    floatIndex=(floatIndex+1)%floatSets.length;
+    updateFloat(heroFloatA,floatSets[floatIndex][0]);
+    updateFloat(heroFloatB,floatSets[floatIndex][1]);
+  },3200);
+}
